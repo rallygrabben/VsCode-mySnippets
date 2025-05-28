@@ -1,0 +1,204 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"Print to console": {
+		"scope": "javascript,typescript",
+		"prefix": "log",
+		"body": [
+			"console.log('$1');",
+			"$2"
+		],
+		"description": "Log output to console"
+	},
+	"Javascript Css Injector": {
+		"scope": "javascript,typescript",
+		"prefix": "CSSInjector",
+		"body": [
+			"function CSSInjector(styleString) {",
+			"\t// Injects CSS into the document Head",
+			"\t// Ex: CSSInjector('body { background: red; }'",
+			"\t// It also supports multi-line strings",
+			"\tconst style = document.createElement('style');",
+			"\tstyle.textContent = styleString;",
+			"\tdocument.head.append(style);",
+			"}",
+			"$1"
+		]
+	},
+	"Location Change": {
+		"scope": "javascript,typescript",
+		"prefix": "locationChangeChecker",
+		"body": [
+			"(() => {",
+            "\t// Self-invoking function that checks if the url changes",
+            "\tlet oldPushState = history.pushState;",
+            "\thistory.pushState = function pushState() {",
+            "\t\tlet ret = oldPushState.apply(this, arguments);",
+            "\t\twindow.dispatchEvent(new Event('pushstate'));",
+            "\t\twindow.dispatchEvent(new Event('locationchange'));",
+            "\t\treturn ret;",
+            "\t};",
+            "",
+            "\tlet oldReplaceState = history.replaceState;",
+            "\thistory.replaceState = function replaceState() {",
+            "\t\tlet ret = oldReplaceState.apply(this, arguments);",
+            "\t\twindow.dispatchEvent(new Event('replacestate'));",
+            "\t\twindow.dispatchEvent(new Event('locationchange'));",
+            "\t\treturn ret;",
+            "\t};",
+            "",
+            "\twindow.addEventListener('popstate', () => {",
+            "\t\twindow.dispatchEvent(new Event('locationchange'));",
+            "\t});",
+            "})();",
+            "",
+            "",
+            "window.addEventListener(\"locationchange\", function () {",
+            "\tconsole.log(\"Location has changed!\")",
+            "\t// function to run: ",
+			"${1:\t// 🛑Don't forget to put something here🛑}",
+            "});",
+			"$2"
+		]
+	},
+	"Self-invoking function": {
+		"scope": "javascript,typescript",
+		"prefix": "selfInvoking",
+		"body": [
+			"(() => {",
+			"\t$1",
+			"})()"
+		]
+	},
+	"createAndAppend": {
+		"scope": "javascript,typescript",
+		"prefix": "createAndAppend",
+		"body": [
+			"function createAndAppend(elem, attachpoint) {",
+			"\tconst classes = elem.split(/(?=\\.)/)",
+			"\tlet baseelement = classes[0]",
+			"\tlet IDList = []",
+			"\tlet ClassList = []",
+			"",
+			"",
+			"\t// Gets base element from elem",
+			"\tif (baseelement.includes(\".\")) {",
+			"\t\tbaseelement = classes[0].split(/(?=\\.)/)[0]",
+			"\t}",
+			"\telse if (baseelement.includes(\"#\")) {",
+			"\t\tbaseelement = classes[0].split(/(?=#)/)[0]",
+			"\t}",
+			"",
+			"\t// Splits elem into classes and ",
+			"\tfor (let i = 0; i < classes.length; i++) {",
+			"\t\tif (i == 0) {",
+			"",
+			"\t\t\tif (classes[0].includes(\"#\")) {",
+			"\t\t\t\tIDList.push(classes[i].split(\"#\")[1])",
+			"\t\t\t}",
+			"\t\t\tif (classes[0].includes(\".\")) {",
+			"\t\t\t\tClassList.push(classes[i].split(\".\")[1])",
+			"\t\t\t}",
+			"\t\t\t",
+			"\t\t} else {",
+			"",
+			"\t\t\tconst element = classes[i].split(/(?=\\#)/)",
+			"\t\t\tfor (let e of element) {",
+			"\t\t\t\tif (e.includes(\"#\")) {",
+			"\t\t\t\t\tIDList.push(e.split(\"#\")[1])",
+			"\t\t\t\t}",
+			"\t\t\t\tif (e.includes(\".\")) {",
+			"\t\t\t\t\tClassList.push(e.split(\".\")[1])",
+			"\t\t\t\t}",
+			"\t\t\t}",
+			"",
+			"\t\t}",
+			"\t}",
+			"",
+			"\tconst element = document.createElement(baseelement)",
+			"\tfor (const classItem of ClassList) {",
+			"\t\telement.classList.add(classItem)",
+			"\t}",
+			"\tfor (const IDItem of IDList) {",
+			"\t\telement.id += `${IDItem} `",
+			"\t}",
+			"",
+			"\tattachpoint.appendChild(element)",
+			"",
+			"\treturn element",
+			"}",
+			"",
+			"",
+			"$1"
+		]
+		},
+	"Default CSS": {
+		"scope": "css", 
+		"prefix": "!",
+		"body": [
+			"*, *::before, *::after {",
+            "\tbox-sizing: border-box;",
+            "\tmargin: 0;",
+            "\tpadding: 0;",
+            "}",
+            "",
+            ":root {",
+            "\t--background-color: #2c2c2c;",
+            "\t--text-color: #fff",
+            "",
+            "}",
+            "",
+            "body {",
+            "\tbackground-color: var(--background-color);",
+            "\tcolor: var(--text-color);",
+            "}",
+            "",
+            "$1"
+		]
+	},
+	"Batch color": {
+		"scope": "bat",
+		"prefix": "ANSIColor",
+		"body": [
+			"REM Define ANSI escape codes for colored output (put anywhere early)",
+			"\tfor /f %%i in ('echo prompt $$E^| cmd') do set \"ESC=%%i[\"",
+			"\tset \"ESCres=%ESC%0m\"",
+			"\tset \"ESCsuccessclr=%ESC%32m\"",
+			"\tset \"ESCinfoclr=%ESC%36m\"",
+			"\tset \"ESCwarningclr=%ESC%33m\"",
+			"\tset \"ESCerrorclr=%ESC%91m\"",
+			"",
+			"\tset \"ESCsuccess=[%ESCsuccessclr%SUCCESS%ESCres%]\"",
+			"\tset \"ESCinfo=[%ESCinfoclr%INFO%ESCres%]\"",
+			"\tset \"ESCwarning=[%ESCwarningclr%Warning%ESCres%]\"",
+			"\tset \"ESCerror=[%ESCerrorclr%Error%ESCres%]\"",
+			"",
+			"$1"
+		]
+	},
+	"EscapeMessage": {
+		"scope": "bat",
+		"prefix": "EscapeMessage",
+		"body": [
+			"REM Function to escape special characters",
+			"REM Don't forget to call `setlocal EnableDelayedExpansion` before using this function",
+			":escape_special_characters",
+			"\tset \"msg=%~1\"",
+			"\t",
+			"\tset \"msg_escaped=!msg!\"",
+			"\tset \"msg_escaped=!msg_escaped:^=^^!\"",
+			"\tset \"msg_escaped=!msg_escaped:>=^>!\"",
+			"\tset \"msg_escaped=!msg_escaped:<=^<!\"",
+			"\tset \"msg_escaped=!msg_escaped:&=^&!\"",
+			"\tset \"msg_escaped=!msg_escaped:|=^|!\"",
+			"\tset \"msg_escaped=!msg_escaped:(=^(!\"",
+			"\tset \"msg_escaped=!msg_escaped:)=^)!\"",
+			"exit /b"
+		]
+	}
+}
