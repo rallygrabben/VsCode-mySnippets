@@ -21,10 +21,18 @@ Not going to lie grabbed this from stackexchange. Mainly used for one-page style
 Put the commands or functions you want to run inside the eventListener.
 
 ### Self-Invoking Function
-Just shorthand for a self-invoking functoin
+Just shorthand for a self-invoking function
+
+### Debounce
+Runs the specified function, starts a timer, then only executes the function again if the timer has run out. Useful for observers or other events that trigger often. 
 
 ### createAndAppend
-Helper function that creates an element and attaches it to the attachpoint. It allows for definition of classes and ids directly in the creation of the element. You can also optionally change the way it appends to attachpoint, the options are: appendChild, before, after, and insertBefore. 
+Helper function that creates an element and attaches it to the attachpoint. It allows for definition of classes and ids directly in the creation of the element. You can also optionally change the way it appends to attachpoint, the options are: 
+appendChild, 
+before, 
+after, 
+insertBefore, 
+and insertLast.
 Usage:
 ```jsx
 createAndAppend("div.container.background-blue#mainContainer", document.body)
