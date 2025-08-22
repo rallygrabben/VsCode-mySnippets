@@ -65,6 +65,25 @@
             "});",
 			"$2"
 		]
+	},	
+	"Debounce": {
+		"scope": "javascript,typescript",
+		"prefix": "debounce",
+		"body": [
+			"// Debounce function to prevent excessive processing (function to run, time in ms, args for function)",
+			"function debounce(func, wait) {",
+			"\tlet timeout;",
+			"\treturn function executedFunction(...args) {",
+			"\t\tconst later = () => {",
+			"\t\t\tclearTimeout(timeout);",
+			"\t\t\tfunc(...args);",
+			"\t\t};",
+			"\t\tclearTimeout(timeout);",
+			"\t\ttimeout = setTimeout(later, wait);",
+			"\t};",
+			"}",
+			"",
+		]
 	},
 	"Self-invoking function": {
 		"scope": "javascript,typescript",
@@ -100,7 +119,7 @@
 			"\t\telement.classList.add(classItem)",
 			"\t}",
 			"\tfor (const IDItem of IDList) {",
-			"\t\telement.id += `${ IDItem } `",
+			"\t\telement.id += `${ IDItem }`",
 			"\t}",
 			"",
 			"\tconst attachActions = {",
@@ -108,6 +127,7 @@
 			"\t\tbefore: () => attachpoint.before(element),",
 			"\t\tafter: () => attachpoint.after(element),",
 			"\t\tinsertBefore: () => attachpoint.insertBefore(element, attachpoint.childNodes[0]),",
+			"\t\tinsertLast: () => attachpoint.insertAdjacentElement('beforeend', element),",
 			"\t}",
 			"",
 			"\tif (attachActions[attachType]) {",
