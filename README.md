@@ -31,8 +31,9 @@ Helper function that creates an element and attaches it to the attachpoint. It a
 appendChild, 
 before, 
 after, 
-insertBefore, 
-and insertLast.
+insertBefore,
+insertLast,
+and dontAttach.
 Usage:
 ```jsx
 createAndAppend("div.container.background-blue#mainContainer", document.body)
