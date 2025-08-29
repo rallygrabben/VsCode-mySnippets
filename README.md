@@ -32,8 +32,9 @@ appendChild,
 before, 
 after, 
 insertBefore,
-insertLast,
-and dontAttach.
+insertLast
+
+You can also just create the element without attaching by omitting the attachpoint.
 Usage:
 ```jsx
 createAndAppend("div.container.background-blue#mainContainer", document.body)
